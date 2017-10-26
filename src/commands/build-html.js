@@ -1,10 +1,9 @@
 /* @flow */
-import webpack from "webpack"
-import Promise from "bluebird"
-import fs from "fs"
-import webpackConfig from "./webpack.config"
+const webpack = require(`webpack`)
+const fs = require(`fs`)
+const webpackConfig = require(`../utils/webpack.config`)
 const { store } = require(`../redux`)
-const { createErrorFromString } = require(`../reporter/errors`)
+const { createErrorFromString } = require(`gatsby-cli/lib/reporter/errors`)
 
 const debug = require(`debug`)(`gatsby:html`)
 
@@ -31,7 +30,7 @@ module.exports = async (program: any) => {
       }
       const outputFile = `${directory}/public/render-page.js`
       if (stats.hasErrors()) {
-        let webpackErrors = stats.toJson().errors
+        let webpackErrors = stats.compilation.errors.filter(e => e)
         return reject(
           createErrorFromString(webpackErrors[0], `${outputFile}.map`)
         )

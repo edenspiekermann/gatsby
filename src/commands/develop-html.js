@@ -1,10 +1,9 @@
 /* @flow */
-const webpack = require(`webpack`)
-const Promise = require(`bluebird`)
 const fs = require(`fs`)
-const webpackConfig = require(`./webpack.config`)
-const { createErrorFromString } = require(`../reporter/errors`)
+const webpack = require(`webpack`)
+const { createErrorFromString } = require(`gatsby-cli/lib/reporter/errors`)
 const debug = require(`debug`)(`gatsby:html`)
+const webpackConfig = require(`../utils/webpack.config`)
 
 module.exports = async (program: any) => {
   const { directory } = program
